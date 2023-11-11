@@ -165,3 +165,69 @@
     
     const duplicarNumeros = numeros.filter(numero => numero * 2); 
     ```
+## MÓDULO SOBRE HTML, CSS Y RESPONSIVE DESIGN 
+
+1. HTML significa Hypertext Markup Language, se podría ver a HTML como el esqueleto de una página web, con este lenguaje de marcado se definen los elementos que contendrá la página web. 
+
+2. La estructura básica de un documento HTML a grandes rasgos se compone de las etiquetas html, head, body, main, section, article, aside, footer. 
+
+3. CSS significa cascading styled sheets, este lenguaje de marcado tiene como propósito darle estilos a una página web 
+
+4. Los selectores en css son los selectores que se usan para delimitar el elemento que se quiere estilizar; los principales tipos de selectores son: selectores de elementos (h1, span, p, div), selectores de clase (.class) y selectores de ids (#myElemento); la especificidad es importante en css por qué se debe estar al tanto de cuales estilos serán aplicados en caso de dos o más selectores estén apuntado a un mismo selector, en este caso se considerara el que tenga más especificidad. 
+
+5. Los estilos en línea son los que se agregan en el mismo elemento html, los estilos internos se agregan en el mismo documento HTML dentro del tag style y los estilos externos son los que se agregan de manera independiente en un archivo alterno. Es recomendado usar estilos externos ya que propicia el orden en el código, así como la corrección de errores.  
+
+6. Flexbox es una propiedad de css para mostrar los elementos en pantalla y tener la facilidad de organizar estos de una manera más sencilla.  
+
+    Para utilizar flexbox se debe usar el siguiente comando: 
+
+    ```
+    Display: flex; 
+    ```
+
+7. Flexbox tiene diversas propiedades, entre las más importante están: 
+
+    Flex-direction: row o column, permite cambiar la dirección del eje principal 
+
+    Align-items: center, permite alinear los elementos de manera central 
+
+    Justify-content: center, permite justificar el contenido de la página al centro de la misma 
+
+    Flex-wrap: wrap, permite agrupar todos los elementos 
+
+    justify-content: space evenly o between, permite espaciar los elementos  
+
+8. Grid layout es una propiedad de css que permite disponer elementos de manera bidimensional en filas y columnas. Cabe aclarar que flexbox está diseñado para disponer elementos en manera unidimensional. 
+
+9. Para crear una cuadricula sencilla con grid se puede usar el siguiente código: 
+
+    En HTML: 
+
+    ```
+    <div class="grid-container"> 
+        <div class="item">1</div> 
+        <div class="item">2</div> 
+        <div class="item">3</div> 
+        <div class="item">4</div> 
+    </div> 
+    ```
+
+    En CSS:  
+
+    ```
+    .grid-container { 
+      display: grid; 
+      grid-template-columns: 100px 100px; 
+      grid-gap: 10px; 
+    } 
+    
+    .item { 
+      background-color: red; 
+      padding: 10px; 
+    } 
+    ```
+
+10. El diseño responsivo trata de que cuando la pantalla cambie de tamaño la aplicación también debe cambiar de tamaño y en algún momento o limite los elementos de la página deben cambiar de disposición para adaptarse por ejemplo a un nuevo dispositivo. 
+
+11. Para lograr diseños responsivos se deben usar: media querys, unidades relativas (em, porcentajes) y disposición de elementos flexible. 
+    
