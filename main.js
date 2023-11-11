@@ -1,3 +1,5 @@
+/* RESOLUCIÓN DEL MÓDULO 1 */
+
 /* Dada una lista (o array) de número s enteros, 
 encontrar el número más grande de la list a y mostrarlo
 en consola. 
