@@ -300,4 +300,161 @@
 
     Event Delegation: la delegación de eventos evita que se tengan que agregar eventos a cada elemento, en lugar     de eso, solo se agrega el evento en el elemento padre. 
 
-11. Estos dos conceptos son importantes ya que el uso de la delegación de eventos mejora de manera significativa la eficiencia de la página web. 
+11. Estos dos conceptos son importantes ya que el uso de la delegación de eventos mejora de manera significativa la eficiencia de la página web.
+
+## MÓDULO SOBRE COMUNICACIÓN CON EL SERVIDOR (STORAGE, PROMESAS ASINCRONÍA Y PETICIONES HTTPS) 
+
+1. Local Storage: almacena datos en el navegador, estos datos persisten hasta que el usuario los elimine manualmente. 
+
+    Session Storage: almacena datos en el navegador, los datos persisten hasta que se cierra la pestaña del navegador. 
+
+2. La gran diferencia entre los dos tipos de almacenamiento es la persistencia de los datos, ya que con local storage los datos persisten de manera indefinida y con session storage los datos persisten hasta que se cierre el navegador. 
+
+3. Estos dos métodos de almacenamiento son útiles ya que permiten la persistencia local de la información, permitiendo así a las páginas web funcionar sin conexión a internet. 
+
+    El límite de almacenamiento para ambos métodos esta entre 5 MB y 10 MB. 
+
+4. Las promesas son objetos que resultan de ejecutar una función asíncrona, son utilizadas para trabajar con solicitudes que no responden de manera inmediata si no que toman cierto tiempo, por ejemplo, la comunicación con un servidor. 
+
+5. Una operación asíncrona es una operación de la cual se espera una respuesta, pero no de manera inmediata, lo que las promesas introducen es que no se tenga que parar el flujo del código hasta que se tenga la respuesta final de la operación, si no, que se pueda seguir con el flujo del código de manera paralela. 
+
+6. El siguiente ejemplo es la implementación de una petición GET con axios: 
+
+    ```
+    export const getUsers = async () => { 
+      try { 
+        const { data } = await axios.get(endpoints.users); 
+        return data.length ? data : null; 
+      } catch (error) { 
+        console.log(error); 
+        return null; 
+      } 
+    }; 
+    ```
+
+7. JSON SERVER es una herramienta que permite construir una fake API a partir de un archivo json, esta herramienta es meramente usada para pruebas y no reemplaza una verdadera API 
+
+8. Es útil simular una API ya que se puede realizar el frontend de una aplicación llevando a cabo todo tipo de pruebas con la fake API creada. 
+
+9. then() está enfocado en cadenas de llamadas, lo que puede generar un código difícil de leer y mantener, mientras que async/await ofrece una sintaxis más fácil de leer y de mantener. 
+
+    El manejo de errores con then() se hace usando catch() y en el caso de async/await se hace con try catch. 
+
+10. Para configurar una API false con JSON SERVER se debe hacer lo siguiente: 
+
+    Instalar json server: 
+    ```
+    npm install -g json-server 
+    ```
+ 
+
+    Configurar el archivo json: 
+    
+    ```
+    { 
+      "posts": [ 
+        { "id": 1, "title": "Post 1" }, 
+        { "id": 2, "title": "Post 2" }, 
+        { "id": 3, "title": "Post 3" } 
+      ] 
+    } 
+    ```
+ 
+
+    Iniciar json server: 
+    
+    ```
+    json-server --watch db.json 
+    ```
+ 
+
+    Implementar las peticiones: 
+
+ 
+    ```
+    async function obtenerDatos() { 
+    
+      try { 
+        const respuestaGet = await fetch('http://localhost:3000/posts'); 
+        const posts = await respuestaGet.json(); 
+        console.log('Posts:', posts); 
+    
+    
+        const respuestaPost = await fetch('http://localhost:3000/posts', { 
+          method: 'POST', 
+          headers: { 
+            'Content-Type': 'application/json', 
+          }, 
+          body: JSON.stringify({ title: 'Nuevo Post' }), 
+        }); 
+    
+    
+        const respuestaPut = await fetch('http://localhost:3000/posts/1', { 
+          method: 'PUT', 
+          headers: { 
+            'Content-Type': 'application/json', 
+          }, 
+          body: JSON.stringify({ title: 'Post Actualizado' }), 
+        }); 
+      
+    
+        const respuestaDelete = await fetch('http://localhost:3000/posts/3', { 
+          method: 'DELETE', 
+        }); 
+    
+        
+      } catch (error) { 
+        console.error('Error:', error); 
+      } 
+    
+    } 
+    ```
+ 
+
+11. Fetch es una API nativa de javascript que tiene compatibilidad con la mayoría de los navegadores modernos, su sintaxis es básica y fetch puede requerir trabajo adicional para tareas más avanzadas. 
+
+    Axios es una librería de terceros que funciona en navegadores y en Node.js, tiene sintaxis simple y         funcionalidades adicionales. 
+
+12. Las peticiones HTTP son importantes ya que permiten interactuar con servidores para obtener o enviar información. 
+
+13. Este seria el mismo ejemplo anterior usando axios: 
+
+    ```
+    async function obtenerDatos() { 
+      try { 
+        const respuestaGet = await axios.get('http://localhost:3000/posts'); 
+        console.log('Posts:', respuestaGet.data); 
+
+        const respuestaPost = await axios.post('http://localhost:3000/posts', { title: 'Nuevo Post' }); 
+        console.log('Nuevo post agregado:', respuestaPost.data); 
+    
+        const respuestaPut = await axios.put('http://localhost:3000/posts/1', { title: 'Post Actualizado' }); 
+        console.log('Post actualizado:', respuestaPut.data); 
+    
+        const respuestaDelete = await axios.delete('http://localhost:3000/posts/3'); 
+        console.log('Post eliminado:', respuestaDelete.status === 200 ? 'Éxito' : 'Fallido'); 
+    
+      } catch (error) { 
+        console.error('Error:', error); 
+      } 
+    } 
+    ```
+
+14. El manejo de errores es de suma importancia ya que no siempre el resultado de las promesas será un resultado exitoso, a veces el resultado será erróneo por lo que es menester capturar errores para evitar que el código se rompa. 
+
+15. Los errores se manejan usando try catch, en el bloque try se escribe la petición y en el bloque del catch se captura el error evitando que el código se comporte de manera inesperada. 
+
+16. then() maneja el resultado de las promesas con cadenas, lo que puede resultar en anidamientos complejos. Por otro lado, try/catch maneja excepciones de forma más directa y plana, aplicable tanto a errores síncronos como a promesas, lo que ofrece una estructura más clara y legible. 
+
+17. código:  
+
+    ```
+    async function obtenerDatos() { 
+      try { 
+        const respuestaGet = await axios.get('http://localhost:3000/posts'); 
+        console.log('Posts:', respuestaGet.data); 
+      } catch (error) { 
+        console.error('Error:', error); 
+      } 
+    }
+    ```
