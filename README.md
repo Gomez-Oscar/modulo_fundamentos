@@ -231,3 +231,73 @@
 
 11. Para lograr diseños responsivos se deben usar: media querys, unidades relativas (em, porcentajes) y disposición de elementos flexible. 
     
+## MÓDULO SOBRE DOM E INTERACCIÓN CON EL DOM 
+
+1. El DOM es una interfaz de programación que permite crear una estructura de árbol en donde se pueden agregar elementos o nodos. 
+
+2. El HTML es el lenguaje mediante el cual se puede agregar elementos al DOM, el DOM alberga toda la estructura HTML. 
+
+3. Es importante entender y manipular el DOM, ya que este aloja todos los elementos de una página web, es en el DOM donde se verá representada la página en cuestión. 
+
+4. Los eventos del DOM son funciones que se ejecutan cuando ocurre un determinado evento, por ejemplo un click o un evento de carga, estos son importantes ya que permiten agregar funcionalidad a una página web. 
+
+5. Algunos ejemplos son: 
+
+ 
+    ```
+    const myButton = document.getElementById('myButton'); 
+    
+     myButton.addEventListener('click', () => { 
+        console.log('¡Se hizo clic en el botón!'); 
+    }); 
+    
+
+    const myForm = document.getElementById('myForm'); 
+
+     myForm.addEventListener('submit', (event) => { 
+        event.preventDefault();     
+        console.log('¡El formulario se ha enviado!'); 
+    
+    }); 
+    
+    
+    window.addEventListener('load', () => { 
+        console.log('¡La página ha cargado completamente!'); 
+    }); 
+    
+     
+    document.addEventListener('DOMContentLoaded', () => { 
+        console.log('¡El DOM se ha cargado!'); 
+    }); 
+    
+    ```
+
+6. Es importante manejar eventos ya que esto permite que la página sea una página interactiva y que responda a las interacciones del usuario. Los controladores en javascript se introducen con los listeners. 
+
+7. Métodos para seleccionar elementos: 
+
+    document.getElementById(‘id’) = con este método se obtiene el elemento con el determinado id 
+
+    document.querySelector(.class) = con este método se obtiene el elemento con la determinada clase 
+
+    document.querySelectorAll(.class) = con este método se obtienen todos los elementos con la determinada clase 
+
+8. Para este fin primero se debe crear un nuevo elemento usando el método createElement de document, luego se usa el método appendChild para agregar el nuevo elemento a un elemento existente: 
+
+    ```
+    const newElement = document.createElement('p'); 
+    
+    newElement.textContent = 'new element'; 
+    
+    const MainContainer = document.querySelector('.mainContainer'); 
+    
+    MainContainer.appendChild(newElement); 
+    ```
+
+9. La manipulación del DOM permite agregar aún más dinamismo e interactividad a una página web, ya que, si un usuario interactúa con una página, los cambios se verán reflejados en el DOM de manera casi instantánea. 
+
+10. Event Bubbling: básicamente el burbujeo de eventos describe un comportamiento de desencadenamiento cuando se ejecuta un evento en un elemeto hijo, ya que, este evento se ira propaganda hacia los elementos padre. 
+
+    Event Delegation: la delegación de eventos evita que se tengan que agregar eventos a cada elemento, en lugar     de eso, solo se agrega el evento en el elemento padre. 
+
+11. Estos dos conceptos son importantes ya que el uso de la delegación de eventos mejora de manera significativa la eficiencia de la página web. 
