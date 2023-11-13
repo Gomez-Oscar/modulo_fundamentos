@@ -116,3 +116,141 @@ const handleSubmit = event => {
 formulario.addEventListener('submit', event => {
   handleSubmit(event);
 });
+
+/* RESOLUCIÓN DEL MÓDULO 4 */
+
+// punto 1
+
+const localSave = document.querySelector('#localSave');
+const localGet = document.querySelector('#localGet');
+const localDelete = document.querySelector('#localDelete');
+
+const sessionSave = document.querySelector('#sessionSave');
+const sessionGet = document.querySelector('#sessionGet');
+const sessionDelete = document.querySelector('#sessionDelete');
+
+let name;
+
+localSave.addEventListener('click', () => {
+  name = document.querySelector('#storageSection > input').value;
+
+  if (name.trim() !== '') {
+    localStorage.setItem('Name', name);
+    console.log(
+      'Tu nombre fue guardado exitosamene en localstorage!, ve y revisa'
+    );
+  } else {
+    alert('porfavor escribe tu nombre');
+  }
+});
+
+localGet.addEventListener('click', () => {
+  console.log('Este es tu nombre: ', localStorage.getItem('Name'));
+});
+
+localDelete.addEventListener('click', () => {
+  localStorage.removeItem('Name');
+  console.log('Tu nombre fue borrado de local storage!, ve y revisa');
+});
+
+sessionSave.addEventListener('click', () => {
+  name = document.querySelector('#storageSection > input').value;
+
+  if (name.trim() !== '') {
+    sessionStorage.setItem('Name', name);
+    console.log(
+      'Tu nombre fue guardado exitosamene en session storage!, ve y revisa'
+    );
+  } else {
+    alert('porfavor escribe tu nombre');
+  }
+});
+
+sessionGet.addEventListener('click', () => {
+  console.log('Este es tu nombre: ', sessionStorage.getItem('Name'));
+});
+
+sessionDelete.addEventListener('click', () => {
+  sessionStorage.removeItem('Name');
+  console.log('Tu nombre fue borrado de session storage!, ve y revisa');
+});
+
+// punto 2
+
+const pokemonsSection = document.querySelector('#pokemonsSection');
+const ENDPOINT = 'https://pokeapi.co/api/v2/pokemon';
+let mainContainer = document.querySelector('.main_container');
+
+const getPokemons = async URL => {
+  try {
+    const response = await fetch(URL);
+    const data = await response.json();
+    console.log(data);
+    listPokemons(data.results);
+    return data;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+};
+
+const listPokemons = pokemons => {
+  pokemonsSection.innerHTML = '';
+
+  pokemons.map(pokemon => {
+    pokemonsSection.innerHTML += /*html*/ `
+      <p>${pokemon.name}</p>
+    `;
+  });
+};
+
+getPokemons(ENDPOINT);
+
+// punto 3
+
+const JSON_SERVER_ENDPOINT = 'http://localhost:3000/names';
+
+const jsonserverGet = document.querySelector('#jsonserverGet');
+const jsonserverSave = document.querySelector('#jsonserverSave');
+let jsonserverName;
+
+jsonserverGet.addEventListener('click', async () => {
+  try {
+    const response = await fetch(JSON_SERVER_ENDPOINT);
+    const data = await response.json();
+
+    data.map(item => {
+      console.log(item.name);
+    });
+
+    return data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+});
+
+jsonserverSave.addEventListener('click', async event => {
+  event.preventDefault();
+  jsonserverName = document.querySelector('#jsonserverSection > input').value;
+  console.log(jsonserverName);
+
+  if (jsonserverName.trim() !== '') {
+    try {
+      const response = await fetch(JSON_SERVER_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: jsonserverName }),
+      });
+
+      return response;
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  } else {
+    alert('Porfavor escribe tu nombre');
+  }
+});
